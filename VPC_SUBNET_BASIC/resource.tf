@@ -9,7 +9,7 @@ resource "aws_vpc" "aws_vpc_block" {
 }
 
 resource "aws_subnet" "aws_subnet_block" {
-  depends_on = [ aws_vpc.aws_vpc_block ]       // due to this flag, So this resorce block wait until creation of above VPC
+  depends_on = [ aws_vpc.aws_vpc_block ]       // This is a metaargument flag(depends_on), due to this flag, the subnet resorce block wait until creation of above VPC
   vpc_id = aws_vpc.aws_vpc_block.id            // Refering above VPC_ID to create subnet
   cidr_block = "10.10.0.0/24"
   availability_zone = "ap-south-1a"
