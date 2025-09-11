@@ -1,0 +1,35 @@
+# Ignore Terraform working directory
+.terraform/
+**/.terraform/*
+
+# Ignore Terraform state files (local & backups)
+*.tfstate
+*.tfstate.*
+
+# Ignore crash logs
+crash.log
+crash.*.log
+
+# Ignore Terraform variable files that often contain secrets
+# (only include if you don’t store secrets in version control)
+*.tfvars
+*.tfvars.json
+
+# Ignore override files (local overrides, not usually committed)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform CLI config files
+.terraformrc
+terraform.rc
+
+# Lock file (if generated locally), OS / Editor files
+**/.terraform.lock.hcl
+**/.DS_Store
+
+# Optional: ignore plan output files
+# If you run `terraform plan -out=tfplan`
+# then you may want to ignore these
+*.tfplan
