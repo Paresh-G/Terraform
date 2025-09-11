@@ -17,3 +17,6 @@ resource "aws_subnet" "aws_subnet_block" {
     "Name" = "my_public_subnet"
   }
 }
+
+// You can used the flag depends on like below for multiple dependants.
+// depends_on = [ aws_vpc.aws_vpc_block, < dependant resource name here>, etc. ] 
