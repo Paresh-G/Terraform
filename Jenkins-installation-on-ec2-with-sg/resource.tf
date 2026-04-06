@@ -14,14 +14,23 @@ resource "aws_instance" "my_jenkins_instance" {
     host        = self.public_ip
   }
 
-  provisioner "remote-exec" {
+provisioner "remote-exec" {
     inline = [
       "sudo yum update -y",
       "sudo yum install -y java-21-amazon-corretto.x86_64",
       "sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo",
       "sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key",
       "sudo yum install -y jenkins",
-      "sudo systemctl enable --now jenkins"
+      "sudo systemctl enable --now jenkins",
+      "sudo yum install -y git",
+      "sudo wget https://dlcdn.apache.org/maven/maven-3/3.9.14/binaries/apache-maven-3.9.14-bin.tar.gz -O /opt/apache-maven-3.9.14-bin.tar.gz",
+      "sudo tar -xzf /opt/apache-maven-3.9.14-bin.tar.gz -C /opt/",
+      "sudo sleep 30",
+      "echo 'export JAVA_HOME=/usr/lib/jvm/java-21-amazon-corretto.x86_64' >> ~/.bash_profile",
+      "echo 'export M2_HOME=/opt/apache-maven-3.9.14' >> ~/.bash_profile",
+      "echo 'export M2=$M2_HOME/bin' >> ~/.bash_profile",
+      "echo 'export PATH=$PATH:$JAVA_HOME/bin:$M2_HOME/bin:$M2' >> ~/.bash_profile",
+      "source ~/.bash_profile"
     ]
   }
 }
